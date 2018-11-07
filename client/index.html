@@ -2,25 +2,47 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Push Notifications Using Node</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Push Notifications Using Node</title>
 </head>
 
 <body>
-    <h1>Push Notifications Using Node</h1>
-    <button onclick="pushNoti()">Push Notification</button>
+  <h1>Push Notifications Using Node</h1>
+  <button onclick="pushNoti()">Push Notification</button>
+  <button onclick="getUser()">Get User</button>
+  <button onclick="clearData()">Clear</button>
+  <div id="data"></div>
+  
   <script src=" client.js"></script>
   <script>
-      async function pushNoti() {
-        await fetch("/test", {
-      method: "GET",
-      headers: {
-        "content-type": "application/json"
-      }
-    });
-      }
+    async function pushNoti() {
+      await fetch("/test", {
+        method: "GET",
+        headers: {
+          "content-type": "application/json"
+        }
+      });
+    }
+
+    async function getUser() {
+      const user = await fetch("/getUser", {
+        method: "GET",
+        headers: {
+          "content-type": "application/json"
+        }
+      });
+      const data = await user.json();
+      document.getElementById('data').innerHTML = data.name;
+
+    }
+
+     function clearData() {
+       console.log('a');
+      document.getElementById('data').innerHTML = '';
+  
+    }
   </script>
 </body>
 

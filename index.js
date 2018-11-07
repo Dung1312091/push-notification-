@@ -17,16 +17,22 @@ webpush.setVapidDetails(
   publicKey,
   privateKey
 );
-app.get('/test', (req, res)=> {
-    res.status(201).json({});
+app.get("/test", (req, res) => {
+  res.status(201).json({});
 
-    // Create payload
-    const payload = JSON.stringify({ title: "Re Push Test" });
-  
-    // Pass object into sendNotification
-    webpush
-      .sendNotification(subscriptionTmp, payload)
-      .catch(err => console.error(err));
+  // Create payload
+  const payload = JSON.stringify({ title: "Re Push Test" });
+
+  // Pass object into sendNotification
+  webpush
+    .sendNotification(subscriptionTmp, payload)
+    .catch(err => console.error(err));
+});
+app.get("/getUser", (req, res) => {
+  res.send({
+    name: "Test catch respone when offline",
+    age: 24
+  });
 });
 // Subscribe Route
 app.post("/subscribe", (req, res) => {
@@ -37,12 +43,12 @@ app.post("/subscribe", (req, res) => {
   res.status(201).json({});
 
   // Create payload
-//   const payload = JSON.stringify({ title: "Push Test" });
+  //   const payload = JSON.stringify({ title: "Push Test" });
 
   // Pass object into sendNotification
-//   webpush
-//     .sendNotification(subscription, payload)
-//     .catch(err => console.error(err));
+  //   webpush
+  //     .sendNotification(subscription, payload)
+  //     .catch(err => console.error(err));
 });
 
 const port = 3000;
